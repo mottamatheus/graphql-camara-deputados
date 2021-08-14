@@ -1,6 +1,5 @@
-import { GraphQLServer } from 'graphql-yoga';
-
-import getTypeDefs from './types';
+import { ApolloServer } from 'apollo-server';
+import typeDefs from './types';
 import Query from './resolvers/Query';
 import { removeEmptyProperties } from './utils/object';
 
@@ -9,21 +8,23 @@ const startServer = () => {
     const resolvers = {
       Query,
     };
-    const typeDefs = getTypeDefs();
 
-    const server = new GraphQLServer({
+    const server = new ApolloServer({
       typeDefs,
       resolvers,
+      introspection: true,
     });
-
-    const options = {
+    /* const options = {
       formatParams: args => removeEmptyProperties(args),
       endpoint: '/graphql',
       playground: '/playground',
-    };
-
+    }; */
     // eslint-disable-next-line no-console
-    server.start(options, ({ port }) => console.log(`Server is running on: http://localhost:${port}`));
+    server
+      .listen()
+      .then(({ port }) =>
+        console.log(`Server is running on: http://localhost:${port}`)
+      );
   } catch (e) {
     throw new Error(e.message);
   }

@@ -12,7 +12,9 @@ import QueryTypes from './Query/types.graphql';
 import SituacaoTypes from './Situacao/types.graphql';
 import VotacaoTypes from './Votacao/types.graphql';
 
-export default () => `
+const { gql } = require('apollo-server');
+
+const typeDefs = gql`
   ${BlocoTypes}
   ${DeputadoTypes}
   ${EventoTypes}
@@ -27,3 +29,5 @@ export default () => `
   ${SituacaoTypes}
   ${VotacaoTypes}
 `;
+
+export default typeDefs;

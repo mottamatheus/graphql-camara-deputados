@@ -1,8 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
+
+import { BASE_URL } from '../config';
 
 const client = axios.create({
-  baseURL: "https://dadosabertos.camara.leg.br/api/v2",
-  headers: { accept: "application/json" },
+  baseURL: BASE_URL,
+  headers: { accept: 'application/json' },
 });
 
 export default client;
